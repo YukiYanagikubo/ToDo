@@ -16,6 +16,12 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/> 
     </head>
     <body>
-        @content
+        <div class="ToDo">
+            <header>
+                <h1>TODOリスト</h1>
+                <h2><a>検索</a></h2>
+            </header>
+            @content
+        </div>
     </body>
 </html>
