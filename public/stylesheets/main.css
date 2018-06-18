@@ -1,65 +1,101 @@
-html {
-    background: #eee;
+.ToDo {
+    margin-left: 50px;
+    margin-top: 30px;
+    width: 65%;
+}
+
+header {
+    background: #A9D0F5;
+    border: 1px solid;
 }
 
 header h1 {
-    padding: 0.4em 1.1em;
-    color: white;
-    font-weight: normal;
-    font-size: 24px;
+    display: inline-block;
+    font-size: 32px;
+    margin-top: 18px;
+}
+header h2 {
+    display: inline-block;
+    float: right;
+    font-size: 32px;
+    margin-top: 18px;
+    margin-right: 50px;
 }
 
-section#main {
-    position: relative;
-    padding: 5em 2em;
-    border-bottom: 1px solid #ccc;
-    min-height: 600px;
-} 
-
-section#main .topRight {
-    position: absolute;
-    right: 20px;
-    top: 70px;
+.main-contents {
+    border: 1px solid;
+    background: #eee;
+    padding: 20px 50px 60px;
 }
 
-table.computers em {
-    color: #aaa;
+.new-todo {
+    heght: 300px;
+    background: #FFFFFF;
+    border: 1px solid;
+    padding: 50px 50px 20px;
+    margin-bottom: 20px;
 }
 
-table.computers .introduced, table.computers .discontinued {
-    width: 10%;
-    min-width: 100px;
+.creating {
+    padding-top: 20px;
 }
 
-table.computers .company_name {
-    width: 30%;
-    min-width: 300px;
+.create-left {
+    width: 80%;
+    display: inline-block;
 }
 
-table.computers .header a {
+.create-todo-data{
+    padding-top: 20px;
 }
 
-#actions {
-    position: relative;
+.add-button {
+    background: #A9D0F5;
+    border: none;
+    outline: none;
+    appearance: none;
+    float: right;
+    font-size: 25px;
+    border: 1px solid;
+    padding: 10px 5px;
 }
 
-#actions #add {
-    position: absolute;
-    right: 0;
-    top: 0;
+.todo-list {
 }
 
-#pagination {
-    position: relative;
+.todo {
+    background: #FFFFFF;
+    border: 1px solid;
+    padding: 20px 50px;
+    margin: 0px 0px 20px;
 }
 
-#pagination ul {
-    position: absolute;
-    right: 0;
+.left-box {
+    display: inline-block;
+    width: 50%;
 }
 
-#pagination ul .current a {
-    color: #666;
+.edit-button {
+    background: #A9D0F5;
+    border: none;
+    outline: none;
+    appearance: none;
+    font-size: 25px;
+    border: 1px solid;
+    padding: 10px 5px;
+    float: right;
+    margin-right: 30px;
+}
+
+.check-button {
+    background: #A9D0F5;
+    border: none;
+    outline: none;
+    appearance: none;
+    font-size: 25px;
+    border: 1px solid;
+    padding: 10px 5px;
+    float: right;
 }
 
 
