@@ -12,4 +12,8 @@ public class HomeController extends Controller {
     public Result edit() {
         return Results.ok(edit.render());
     }
+
+    public Result search() {
+        return Results.ok(search.render());
+    }
 }

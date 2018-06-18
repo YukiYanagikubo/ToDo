@@ -98,4 +98,11 @@ header h2 {
     float: right;
 }
 
+.search {
+    background: #FFFFFF;
+    border: 1px solid;
+    height: 40px;
+    margin-bottom: 50px;
+}
+
 
