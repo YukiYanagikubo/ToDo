@@ -34,8 +34,12 @@
                 @helper.form(routes.HomeController.showedit(todo.id)){
                 <input class="edit-button" type="submit" value="編集">
                 }
-                @helper.form(routes.HomeController.showedit(todo.id)){
-                <input class="check-button" type="submit" value="未完了">
+                @helper.form(routes.HomeController.check(todo.id)){
+                    @if(todo.done){
+                        <input class="check-button" type="submit" value="完了">
+                    }else{
+                        <input class="check-button2" type="submit" value="未完了">
+                    }
                 }
             </span>
         </div>
