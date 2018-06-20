@@ -31,4 +31,8 @@ public class Todo extends Model {
         return Todo.find.all();
     }
 
+    public static Todo findById(Long id) {
+        return Todo.find.byId(id);
+    }
+
 }

@@ -83,7 +83,6 @@ header h2 {
     font-size: 25px;
     border: 1px solid;
     padding: 10px 5px;
-    float: right;
     margin-right: 30px;
 }
 
@@ -95,6 +94,10 @@ header h2 {
     font-size: 25px;
     border: 1px solid;
     padding: 10px 5px;
+}
+
+.sort {
+    display: flex;
     float: right;
 }
 
@@ -104,5 +107,3 @@ header h2 {
     height: 40px;
     margin-bottom: 50px;
 }
-
-
