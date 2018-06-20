@@ -1,27 +1,39 @@
-@(message: String)
+@(todos: List[Todo], form: Form[Todo])
 
 @main("Welcome to play") {
 <div class="main-contents">
     <div class="new-todo">
         <h3 class="create-todo">新しいtodoを作成する</h3>
+        @helper.form(routes.HomeController.create()){
         <div class="creating">
             <div class="create-left">
-                <div class="create-todo-name">ToDo名</div>
-                <div class="create-todo-data">期限</div>
+                <div class="create-todo-name">
+                    @helper.inputText(
+                    form("text"), '_label -> "Todo名"
+                    )
+                </div>
+                <div class="create-todo-data">
+                    @helper.inputDate(
+                    form("deadline"),'_label -> "期限"
+                    )
+                </div>
             </div>
-            <input class="add-button" type="button" value="ToDoの追加" onClick="/">
+            <input class="add-button" type="submit" value="ToDoの追加">
         </div>
+        }
     </div>
     <div class="todo-list">
+        @for(todo <- todos){
         <div class="todo">
             <div class="left-box">
-                <h3 class="todo-name">レポートサマリーを作る</h3>
-                <div class="todo-data">期限：　2016年8月10日</div>
-                <div class="todo-created">作成日：2016年8月1日</div>
+                <h3 class="todo-name">@todo.text</h3>
+                <div class="todo-data">期限：　@todo.deadline.format("yyyy年MM月dd日")</div>
+                <div class="todo-created">作成日：@todo.postdate.format("yyyy年MM月dd日")</div>
             </div>
             <input class="check-button" type="button" value="未完了" onClick="/">
             <input class="edit-button" type="button" value="編集" onClick="/">
         </div>
+        }
         <div class="todo">
             <div class="left-box">
                 <h3 class="todo-name">レポートサマリーを作るあああああああああああああああああああ</h3>
