@@ -96,6 +96,17 @@ header h2 {
     padding: 10px 5px;
 }
 
+.check-button2 {
+    background: #A9D0F5;
+    border: none;
+    outline: none;
+    appearance: none;
+    font-size: 25px;
+    border: 1px solid;
+    padding: 10px 5px;
+    background: #F78181;
+}
+
 .sort {
     display: flex;
     float: right;

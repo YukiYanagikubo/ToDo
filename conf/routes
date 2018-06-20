@@ -9,6 +9,8 @@ POST    /                           controllers.HomeController.create()
 GET     /showedit/:id               controllers.HomeController.showedit(id: Long)
 +nocsrf
 POST    /edit/:id                   controllers.HomeController.edit(id: Long)
++nocsrf
+POST    /check/:id                  controllers.HomeController.check(id: Long)
 GET     /search                     controllers.HomeController.search()
 
 # Map static resources from the /public folder to the /assets URL path

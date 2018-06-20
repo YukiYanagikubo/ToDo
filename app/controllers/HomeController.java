@@ -62,6 +62,18 @@ public class HomeController extends Controller {
         }
     }
 
+    public Result check(Long id) {
+        Todo todo = Todo.findById(id);
+        if (todo != null) {
+            todo.done = !todo.done;
+            todo.update();
+            return Results.redirect(routes.HomeController.index());
+        } else {
+            List<Todo> todos = Todo.all();
+            return Results.badRequest(views.html.index.render(todos, form));
+        }
+    }
+
     public Result search() {
         return Results.ok(search.render());
     }
