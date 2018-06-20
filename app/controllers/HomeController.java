@@ -6,7 +6,7 @@ import play.data.*;
 import play.mvc.*;
 import views.html.*;
 
-import java.util.List;
+import java.util.*;
 
 public class HomeController extends Controller {
     private final Form<Todo> form;
@@ -33,8 +33,33 @@ public class HomeController extends Controller {
         }
     }
 
-    public Result edit() {
-        return Results.ok(edit.render());
+    public Result showedit(Long id) {
+        Todo todo = Todo.findById(id);
+        if (todo != null) {
+            Form<Todo> f = form.fill(todo);
+            return Results.ok(views.html.showedit.render(todo, f));
+        } else {
+            List<Todo> todos = Todo.all();
+            return Results.badRequest(index.render(todos, form));
+        }
+    }
+
+    public Result edit(Long id) {
+        Todo todo = Todo.findById(id);
+        Form<Todo> ft = form.bindFromRequest();
+        if (todo != null) {
+            if (ft.hasErrors()) {
+                return Results.badRequest(views.html.showedit.render(todo, ft));
+            }
+            String text = ft.get().text;
+            Date deadline = ft.get().deadline;
+            todo.text = text;
+            todo.deadline = deadline;
+            todo.update();
+            return Results.redirect(routes.HomeController.index());
+        } else {
+            return Results.badRequest(views.html.showedit.render(todo, ft));
+        }
     }
 
     public Result search() {

@@ -30,8 +30,14 @@
                 <div class="todo-data">期限：　@todo.deadline.format("yyyy年MM月dd日")</div>
                 <div class="todo-created">作成日：@todo.postdate.format("yyyy年MM月dd日")</div>
             </div>
-            <input class="check-button" type="button" value="未完了" onClick="/">
-            <input class="edit-button" type="button" value="編集" onClick="/">
+            <span class="sort">
+                @helper.form(routes.HomeController.showedit(todo.id)){
+                <input class="edit-button" type="submit" value="編集">
+                }
+                @helper.form(routes.HomeController.showedit(todo.id)){
+                <input class="check-button" type="submit" value="未完了">
+                }
+            </span>
         </div>
         }
         <div class="todo">
