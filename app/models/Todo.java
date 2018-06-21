@@ -35,4 +35,8 @@ public class Todo extends Model {
         return Todo.find.byId(id);
     }
 
+    public static List<Todo> findBytextLikeIncomplete(String text) {
+        List<Todo> datas = Todo.find.query().where().eq("done", false).ilike("text", "%" + text + "%").orderBy("postdate desc").findList();
+        return datas;
+    }
 }

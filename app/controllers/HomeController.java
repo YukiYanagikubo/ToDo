@@ -4,16 +4,19 @@ import com.google.inject.Inject;
 import models.Todo;
 import play.data.*;
 import play.mvc.*;
-import views.html.*;
+import views.html.index;
 
 import java.util.*;
 
 public class HomeController extends Controller {
     private final Form<Todo> form;
 
+    private final DynamicForm dynamicForm;
+
     @Inject
     public HomeController(FormFactory formFactory) {
         form = formFactory.form(Todo.class);
+        dynamicForm = formFactory.form();
     }
     public Result index() {
         List<Todo> todos = Todo.all();
@@ -26,7 +29,7 @@ public class HomeController extends Controller {
             Todo data = f.get();
             data.save();
             List<Todo> todos = Todo.all();
-            return Results.ok(index.render(todos, f));
+            return Results.ok(index.render(todos, form));
         } else {
             List<Todo> todos = Todo.all();
             return Results.badRequest(index.render(todos, form));
@@ -74,7 +77,9 @@ public class HomeController extends Controller {
         }
     }
 
-    public Result search() {
-        return Results.ok(search.render());
+    public Result showsearch() {
+        String text = dynamicForm.bindFromRequest().get("text");
+        List<Todo> todos = Todo.findBytextLikeIncomplete(text);
+        return Results.ok(views.html.showsearch.render(todos, form));
     }
 }
