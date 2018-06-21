@@ -2,26 +2,12 @@
 
 @main("ToDoリスト") {
 <div class="main-contents">
-    <div class="new-todo">
-        <h3 class="create-todo">新しいtodoを作成する</h3>
-        @helper.form(routes.HomeController.create()){
-        <div class="creating">
-            <div class="create-left">
-                <div class="create-todo-name">
-                    @helper.inputText(
-                    form("text"), '_label -> "Todo名"
-                    )
-                </div>
-                <div class="create-todo-data">
-                    @helper.inputDate(
-                    form("deadline"),'_label -> "期限"
-                    )
-                </div>
-            </div>
-            <input class="add-button" type="submit" value="ToDoの追加">
-        </div>
-        }
+    @helper.form(routes.HomeController.showsearch()){
+    <div class="create-left">
+        @helper.inputText(form("text"))
     </div>
+    <input class="add-button" type="submit" value="検索">
+    }
     <div class="todo-list">
         @for(todo <- todos){
         <div class="todo">
