@@ -97,7 +97,6 @@ header h2 {
 }
 
 .check-button2 {
-    background: #A9D0F5;
     border: none;
     outline: none;
     appearance: none;
@@ -117,4 +116,20 @@ header h2 {
     border: 1px solid;
     height: 40px;
     margin-bottom: 50px;
+}
+
+.info {
+    display: none;
+}
+
+.error {
+    color: #F78181;
+}
+
+label {
+    width: 50px;
+}
+
+input {
+    width: 400px;
 }

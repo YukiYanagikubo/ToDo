@@ -5,9 +5,13 @@
     <div class="new-todo">
         <h3 class="create-todo">新しいtodoを作成する</h3>
         @helper.form(routes.HomeController.create()){
+        @if(form.hasErrors) {
+        @for(err <- form.allErrors()) {
+        } }
         <div class="creating">
             <div class="create-left">
                 <div class="create-todo-name">
+                    @helper.CSRF.formField
                     @helper.inputText(
                     form("text"), '_label -> "Todo名"
                     )
@@ -22,6 +26,9 @@
         </div>
         }
     </div>
+    @if(todos.size() == 0){
+    <h4 class="error">登録されたToDoはございません</h4>
+    }
     <div class="todo-list">
         @for(todo <- todos){
         <div class="todo">
@@ -35,6 +42,7 @@
                 <input class="edit-button" type="submit" value="編集">
                 }
                 @helper.form(routes.HomeController.check(todo.id)){
+                    @helper.CSRF.formField
                     @if(todo.done){
                         <input class="check-button" type="submit" value="完了">
                     }else{

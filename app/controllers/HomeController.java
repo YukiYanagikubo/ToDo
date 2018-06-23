@@ -4,9 +4,9 @@ import com.google.inject.Inject;
 import models.Todo;
 import play.data.*;
 import play.mvc.*;
-import views.html.index;
+import views.html.*;
 
-import java.util.*;
+import java.util.List;
 
 public class HomeController extends Controller {
     private final Form<Todo> form;
@@ -19,8 +19,7 @@ public class HomeController extends Controller {
         dynamicForm = formFactory.form();
     }
     public Result index() {
-        List<Todo> todos = Todo.all();
-        return Results.ok(index.render(todos, form));
+        return Results.ok(index.render(Todo.all(), form));
     }
 
     public Result create() {
@@ -28,11 +27,9 @@ public class HomeController extends Controller {
         if (!f.hasErrors()) {
             Todo data = f.get();
             data.save();
-            List<Todo> todos = Todo.all();
-            return Results.ok(index.render(todos, form));
+            return Results.ok(index.render(Todo.all(), form));
         } else {
-            List<Todo> todos = Todo.all();
-            return Results.badRequest(index.render(todos, form));
+            return Results.badRequest(index.render(Todo.all(), f));
         }
     }
 
@@ -40,10 +37,9 @@ public class HomeController extends Controller {
         Todo todo = Todo.findById(id);
         if (todo != null) {
             Form<Todo> f = form.fill(todo);
-            return Results.ok(views.html.showedit.render(todo, f));
+            return Results.ok(showedit.render(todo, f));
         } else {
-            List<Todo> todos = Todo.all();
-            return Results.badRequest(index.render(todos, form));
+            return Results.badRequest(index.render(Todo.all(), form));
         }
     }
 
@@ -52,16 +48,14 @@ public class HomeController extends Controller {
         Form<Todo> ft = form.bindFromRequest();
         if (todo != null) {
             if (ft.hasErrors()) {
-                return Results.badRequest(views.html.showedit.render(todo, ft));
+                return Results.badRequest(showedit.render(todo, ft));
             }
-            String text = ft.get().text;
-            Date deadline = ft.get().deadline;
-            todo.text = text;
-            todo.deadline = deadline;
+            todo.text = ft.get().text;
+            todo.deadline = ft.get().deadline;
             todo.update();
             return Results.redirect(routes.HomeController.index());
         } else {
-            return Results.badRequest(views.html.showedit.render(todo, ft));
+            return Results.redirect(routes.HomeController.showedit(id));
         }
     }
 
@@ -72,14 +66,13 @@ public class HomeController extends Controller {
             todo.update();
             return Results.redirect(routes.HomeController.index());
         } else {
-            List<Todo> todos = Todo.all();
-            return Results.badRequest(views.html.index.render(todos, form));
+            return Results.badRequest(index.render(Todo.all(), form));
         }
     }
 
     public Result showsearch() {
         String text = dynamicForm.bindFromRequest().get("text");
         List<Todo> todos = Todo.findBytextLikeIncomplete(text);
-        return Results.ok(views.html.showsearch.render(todos, form));
+        return Results.ok(showsearch.render(todos, form));
     }
 }
