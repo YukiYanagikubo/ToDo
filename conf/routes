@@ -4,12 +4,9 @@
 
 # Default path will just redirect to the computer list
 GET     /                           controllers.HomeController.index()
-+nocsrf
 POST    /                           controllers.HomeController.create()
 GET     /showedit/:id               controllers.HomeController.showedit(id: Long)
-+nocsrf
 POST    /edit/:id                   controllers.HomeController.edit(id: Long)
-+nocsrf
 POST    /check/:id                  controllers.HomeController.check(id: Long)
 GET     /showsearch                     controllers.HomeController.showsearch()
 

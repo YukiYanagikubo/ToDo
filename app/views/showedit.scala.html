@@ -8,6 +8,7 @@
         <div class="creating">
             <div class="create-left">
                 <div class="create-todo-name">
+                    @helper.CSRF.formField
                     @helper.inputText(
                     form("text"), '_label -> "Todo名"
                     )

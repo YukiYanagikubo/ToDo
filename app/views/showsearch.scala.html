@@ -8,6 +8,11 @@
     </div>
     <input class="add-button" type="submit" value="検索">
     }
+    @if(todos.size() != 0){
+    <h4 class="error">ToDoが@todos.size()件見つかりました</h4>
+    }else{
+    <h4 class="error">一致するToDoはございません</h4>
+    }
     <div class="todo-list">
         @for(todo <- todos){
         <div class="todo">

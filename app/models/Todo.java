@@ -23,6 +23,7 @@ public class Todo extends Model {
     @CreatedTimestamp
     public Date postdate;
 
+    @Constraints.Required(message = "必須項目です。")
     public Date deadline;
 
     public boolean done = false;
