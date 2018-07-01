@@ -1,25 +1,50 @@
-[<img src="https://img.shields.io/travis/playframework/play-java-ebean-example.svg"/>](https://travis-ci.org/playframework/play-java-ebean-example)
+#使用した技術要素
+- java 1.8.0_172
+- play framework 2.6
 
-# play-java-ebean-example
+＃全体の設計・構成について
+##ToDoリスト機能一覧
+|画面|主な機能|
+|----|-------|
+|トップ画面|ToDoの表示、ToDoの追加、ToDoの状態変更|
+|ToDo編集画面|ToDoの表示、編集|
+|検索画面|ToDoの検索|
+|共通ヘッダー||
 
-This is an example Play application that uses Java, and communicates with an in memory database using EBean.
+##ディレクトリの構成
 
-The Github location for this project is:
+```
+app
+ ├-models
+ |   └-Todo.java     //Todoモデル
+ ├-views
+ |   ├-index.scala.html         //トップ画面
+ |   ├-main.scala.html          //共通ヘッダー
+ |   ├-showedit.scala.html      //編集画面
+ |   └-showsearch.scala.html    //検索画面
+ └-controllers
+        └-HomeController.java   //コントローラー
+```
 
-[https://github.com/playframework/play-java-ebean-example](https://github.com/playframework/play-java-ebean-example)
+#開発環境のセットアップ手順
+##javaのインストール
+```
+brew cask install java8
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8
+```
 
-## Play
+##sbtのインストール
+```
+brew install sbt
+```
 
-Play documentation is here:
+##playのインストール
+```
+git clone https://github.com/YukiYanagikubo/ToDo.git
+cd Todo
+```
 
-[https://playframework.com/documentation/latest/Home](https://playframework.com/documentation/latest/Home)
-
-## EBean
-
-EBean is a Java ORM library that uses SQL:
-
-[https://www.playframework.com/documentation/latest/JavaEbean](https://www.playframework.com/documentation/latest/JavaEbean)
-
-and the documentation can be found here:
-
-[https://ebean-orm.github.io/](https://ebean-orm.github.io/)
+##playの起動
+```
+sbt run
+```
