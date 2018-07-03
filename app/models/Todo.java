@@ -11,13 +11,13 @@ import java.util.*;
 @Entity
 public class Todo extends Model {
 
-    public static Finder<Long, Todo> find = new Finder<>(Todo.class);
+    private static final Finder<Long, Todo> find = new Finder<>(Todo.class);
 
     @Id
     public Long id;
 
     @Constraints.Required(message = "必須項目です。")
-    @Constraints.MaxLength(message = "30文字を越えています。", value = 31)
+    @Constraints.MaxLength(message = "30文字を越えています。", value = 30)
     public String text;
 
     @CreatedTimestamp
@@ -27,6 +27,18 @@ public class Todo extends Model {
     public Date deadline;
 
     public boolean done = false;
+
+    public static void create(Todo todo) {
+        todo.save();
+    }
+
+    public static void update(Todo todo) {
+        todo.update();
+    }
+
+    public static void invertCheck(Todo todo) {
+        todo.done = !todo.done;
+    }
 
     public static List<Todo> all() {
         return Todo.find.all();

@@ -23,7 +23,7 @@ app
  |   ├-showedit.scala.html      //編集画面
  |   └-showsearch.scala.html    //検索画面
  └-controllers
-        └-HomeController.java   //コントローラー
+        └-TodoController.java   //コントローラー
 ```
 
 #開発環境のセットアップ手順
