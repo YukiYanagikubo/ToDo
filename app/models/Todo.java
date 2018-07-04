@@ -28,16 +28,11 @@ public class Todo extends Model {
 
     public boolean done = false;
 
-    public static void create(Todo todo) {
+    public static void create(String text, Date deadline) {
+        Todo todo = new Todo();
+        todo.text = text;
+        todo.deadline = deadline;
         todo.save();
-    }
-
-    public static void update(Todo todo) {
-        todo.update();
-    }
-
-    public static void invertCheck(Todo todo) {
-        todo.done = !todo.done;
     }
 
     public static List<Todo> all() {
@@ -51,5 +46,16 @@ public class Todo extends Model {
     public static List<Todo> findBytextLikeIncomplete(String text) {
         List<Todo> datas = Todo.find.query().where().eq("done", false).ilike("text", "%" + text + "%").orderBy("postdate desc").findList();
         return datas;
+    }
+
+    public void invertCheck(Boolean done) {
+        this.done = !done;
+        update();
+    }
+
+    public void updateWith(String text, Date deadline) {
+        this.text = text;
+        this.deadline = deadline;
+        update();
     }
 }

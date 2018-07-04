@@ -25,8 +25,7 @@ public class TodoController extends Controller {
     public Result create() {
         Form<Todo> f = form.bindFromRequest();
         if (!f.hasErrors()) {
-            Todo data = f.get();
-            Todo.create(data);
+            Todo.create(f.get().text, f.get().deadline);
             return Results.ok(index.render(Todo.all(), form));
         } else {
             return Results.badRequest(index.render(Todo.all(), f));
@@ -50,9 +49,7 @@ public class TodoController extends Controller {
             if (ft.hasErrors()) {
                 return Results.badRequest(showedit.render(todo, ft));
             }
-            todo.text = ft.get().text;
-            todo.deadline = ft.get().deadline;
-            Todo.update(todo);
+            todo.updateWith(ft.get().text, ft.get().deadline);
             return Results.redirect(routes.TodoController.index());
         } else {
             return Results.redirect(routes.TodoController.showedit(id));
@@ -62,8 +59,7 @@ public class TodoController extends Controller {
     public Result check(Long id) {
         Todo todo = Todo.findById(id);
         if (todo != null) {
-            Todo.invertCheck(todo);
-            Todo.update(todo);
+            todo.invertCheck(todo.done);
             return Results.redirect(routes.TodoController.index());
         } else {
             return Results.badRequest(index.render(Todo.all(), form));
