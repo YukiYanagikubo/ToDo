@@ -3,12 +3,12 @@
 # ~~~~
 
 # Default path will just redirect to the computer list
-GET     /                           controllers.HomeController.index()
-POST    /                           controllers.HomeController.create()
-GET     /showedit/:id               controllers.HomeController.showedit(id: Long)
-POST    /edit/:id                   controllers.HomeController.edit(id: Long)
-POST    /check/:id                  controllers.HomeController.check(id: Long)
-GET     /showsearch                     controllers.HomeController.showsearch()
+GET     /                           controllers.TodoController.index()
+POST    /                           controllers.TodoController.create()
+GET     /showedit/:id               controllers.TodoController.showedit(id: Long)
+POST    /edit/:id                   controllers.TodoController.edit(id: Long)
+POST    /check/:id                  controllers.TodoController.check(id: Long)
+GET     /showsearch                 controllers.TodoController.showsearch()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -8,13 +8,13 @@ import views.html.*;
 
 import java.util.List;
 
-public class HomeController extends Controller {
+public class TodoController extends Controller {
     private final Form<Todo> form;
 
     private final DynamicForm dynamicForm;
 
     @Inject
-    public HomeController(FormFactory formFactory) {
+    public TodoController(FormFactory formFactory) {
         form = formFactory.form(Todo.class);
         dynamicForm = formFactory.form();
     }
@@ -25,8 +25,7 @@ public class HomeController extends Controller {
     public Result create() {
         Form<Todo> f = form.bindFromRequest();
         if (!f.hasErrors()) {
-            Todo data = f.get();
-            data.save();
+            Todo.create(f.get().text, f.get().deadline);
             return Results.ok(index.render(Todo.all(), form));
         } else {
             return Results.badRequest(index.render(Todo.all(), f));
@@ -50,21 +49,18 @@ public class HomeController extends Controller {
             if (ft.hasErrors()) {
                 return Results.badRequest(showedit.render(todo, ft));
             }
-            todo.text = ft.get().text;
-            todo.deadline = ft.get().deadline;
-            todo.update();
-            return Results.redirect(routes.HomeController.index());
+            todo.updateWith(ft.get().text, ft.get().deadline);
+            return Results.redirect(routes.TodoController.index());
         } else {
-            return Results.redirect(routes.HomeController.showedit(id));
+            return Results.redirect(routes.TodoController.showedit(id));
         }
     }
 
     public Result check(Long id) {
         Todo todo = Todo.findById(id);
         if (todo != null) {
-            todo.done = !todo.done;
-            todo.update();
-            return Results.redirect(routes.HomeController.index());
+            todo.invertCheck(todo.done);
+            return Results.redirect(routes.TodoController.index());
         } else {
             return Results.badRequest(index.render(Todo.all(), form));
         }

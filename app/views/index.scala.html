@@ -4,7 +4,7 @@
 <div class="main-contents">
     <div class="new-todo">
         <h3 class="create-todo">新しいtodoを作成する</h3>
-        @helper.form(routes.HomeController.create()){
+        @helper.form(routes.TodoController.create()){
         @if(form.hasErrors) {
         @for(err <- form.allErrors()) {
         } }
@@ -38,10 +38,10 @@
                 <div class="todo-created">作成日：@todo.postdate.format("yyyy年MM月dd日")</div>
             </div>
             <span class="sort">
-                @helper.form(routes.HomeController.showedit(todo.id)){
+                @helper.form(routes.TodoController.showedit(todo.id)){
                 <input class="edit-button" type="submit" value="編集">
                 }
-                @helper.form(routes.HomeController.check(todo.id)){
+                @helper.form(routes.TodoController.check(todo.id)){
                     @helper.CSRF.formField
                     @if(todo.done){
                         <input class="check-button" type="submit" value="完了">
